@@ -15,15 +15,15 @@ function goToByScroll(id){
 (function ( $ ) {
  
     $.fn.helpify = function( options ) {
- 		
-      if(options === "start" ) { 
- 		var list = [];
+        
+    //  if(options === "start" ) { 
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        var defaults = {
             // These are the defaults.
-            position: "right"
-        }, options );
+            position:"top"
+        };
  
+        var options = $.extend(defaults, options);  
 
         var countId = 0;
         //for each obj with class "help" I get the parent tag and set popover bootstrap plugin in the attributes
@@ -31,7 +31,7 @@ function goToByScroll(id){
             $(this).parent().attr("data-toggle","popover");
             $(this).parent().attr("data-html","true");
             $(this).parent().attr("id","contId"+countId);
-            $(this).parent().attr("data-placement",settings.position);
+            $(this).parent().attr("data-placement",options.position);
             var dataContent = '<div>'+$(this).attr("text")+'</div><div style="margin:0 auto; margin-top:7px; text-align:center;"><a id="next'+countId+'" class="btn btn-small btn-primary">Next</a></div>'
             $(this).parent().attr("data-content",dataContent);
             $(this).parent().popover({container: 'body'});
@@ -64,7 +64,7 @@ function goToByScroll(id){
             }else
                 $('#contId'+(id-1)).popover('hide');
         });
-    }
+    //}
 
     };
  
