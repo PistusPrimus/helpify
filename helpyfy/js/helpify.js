@@ -26,13 +26,18 @@ function goToByScroll(id){
         var options = $.extend(defaults, options);  
 
         var countId = 0;
+        var total = this.length; //memorizzo quanti tag p, di tipo help, ho inserito.
         //for each obj with class "help" I get the parent tag and set popover bootstrap plugin in the attributes
-        this.each(function() {
+        this.each(function(index) {
             $(this).parent().attr("data-toggle","popover");
             $(this).parent().attr("data-html","true");
             $(this).parent().attr("id","contId"+countId);
             $(this).parent().attr("data-placement",options.position);
-            var dataContent = '<div>'+$(this).attr("text")+'</div><div style="margin:0 auto; margin-top:7px; text-align:center;"><a id="next'+countId+'" class="btn btn-small btn-primary">Next</a></div>'
+            if(index == total-1) {
+                var dataContent = '<div>'+$(this).attr("text")+'</div><div style="margin:0 auto; margin-top:7px; text-align:center;"><a id="next'+countId+'" class="btn btn-small btn-primary">Finish!</a></div>'
+            }else{
+                var dataContent = '<div>'+$(this).attr("text")+'</div><div style="margin:0 auto; margin-top:7px; text-align:center;"><a id="next'+countId+'" class="btn btn-small btn-primary">Next</a></div>'                
+            }
             $(this).parent().attr("data-content",dataContent);
             $(this).parent().popover({container: 'body'});
             countId = countId +1;
